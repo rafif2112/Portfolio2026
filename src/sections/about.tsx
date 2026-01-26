@@ -2,8 +2,36 @@ import Profile from '@/assets/images/Profile.jpeg';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import Github from '@/assets/icons/github.svg';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { fetchAboutData } from '@/store/about';
+import { useEffect } from 'react';
 
 export default function AboutSection() {
+    const dispatch = useAppDispatch();
+    const { data, loading, error } = useAppSelector((state) => state.about);
+
+    useEffect(() => {
+        dispatch(fetchAboutData());
+    }, [dispatch]);
+
+    console.log('About Data:', { data, loading, error });
+
+    if (loading) {
+        return (
+            <section id='about' className="flex items-center justify-center min-h-[60dvh] px-4">
+                <div className="text-white text-xl">Loading...</div>
+            </section>
+        );
+    }
+
+    if (error) {
+        return (
+            <section id='about' className="flex items-center justify-center min-h-[60dvh] px-4">
+                <div className="text-red-500 text-xl">Error: {error}</div>
+            </section>
+        );
+    }
+
     return (
         <section id='about' className="flex items-center min-h-[60dvh] px-4 text-center">
             <motion.div
@@ -16,7 +44,7 @@ export default function AboutSection() {
                 <div className="flex items-start flex-col">
                     <h2 className="text-4xl font-bold mb-4 text-white">About Me</h2>
                     <p className="max-w-2xl text-lg text-justify text-gray-300">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare vestibulum erat, vel condimentum sem. Etiam augue diam, suscipit quis quam eu, iaculis commodo sapien. Nulla vel odio blandit, mollis ligula ullamcorper, placerat dui. Nunc varius vulputate eros accumsan congue. Phasellus non maximus risus. Fusce volutpat urna id erat ultrices gravida. Nulla sem mauris, ultricies eu faucibus vehicula, lacinia ut leo. Donec vel gravida sem, ac rutrum dui.
+                        {data?.biography || 'Loading biography...'}
                     </p>
                 </div>
 
@@ -66,7 +94,7 @@ export default function AboutSection() {
                 >
                     <p className='text-black font-semibold'>Full Stack Web Developer</p>
                 </motion.div>
-                <img src={Profile} alt="Profile" className='object-cover h-96 w-96 rounded-xl' />
+                <img src={data?.profileImageUrl || Profile} alt="Profile" className='object-cover h-96 w-96 rounded-xl' />
                 <motion.div
                     className='absolute bg-white py-2 px-4 rounded-md bottom-10 right-20 transform translate-x-full shadow-lg'
                     transition={{ duration: 0.3 }}
