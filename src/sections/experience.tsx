@@ -1,22 +1,17 @@
 import HeaderSection from "@/components/header-section";
+// import { fetchExperienceData } from "@/store/experience";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import formatDate from "@/utils/formatDate";
 import { motion } from "framer-motion"; // Pastikan import dari framer-motion atau motion/react
+import { useEffect } from "react";
 
 export default function ExperienceSection() {
-    const timelineData = [
-        {
-            year: "Jan 2025 - Jun 2025",
-            title: "Lenna AI (PT. Sinergi Digital Teknologi)",
-            role: "Fullstack Developer",
-            desc: "Developed an HRIS web application managing employee data for internal use, including attendance tracking and leave approval workflows.",
-        },
-        {
-            year: "Sep 2025",
-            title: "Wikventory Project | SMK Wikrama Bogor",
-            role: "Lead Backend Developer",
-            desc: "Spearheaded backend architecture using Laravel and PostgreSQL, designing complex database schemas for asset tracking and secure RESTful APIs to support the Vue.js frontend.",
-        },
-    ];
+    const dispatch = useAppDispatch();
+    const { data } = useAppSelector((state) => state.experience);
 
+    useEffect(() => {
+        // dispatch(fetchExperienceData());
+    }, [dispatch]);
     return (
         <section id="experiences" className="flex flex-col justify-center w-full min-h-auto lg:min-h-[60vh] px-4 py-12 overflow-hidden">
             <HeaderSection
@@ -43,13 +38,13 @@ export default function ExperienceSection() {
                 </motion.div>
 
                 <div className="flex flex-col space-y-12 md:space-y-24">
-                    {timelineData.map((item, index) => {
+                    {data?.map((data, index) => {
                         const isEven = index % 2 !== 0;
 
                         return (
                             <motion.div
                                 key={index}
-                                className={`relative flex flex-col md:flex-row md:items-center w-full pl-14 md:pl-0 ${
+                                className={`relative flex flex-col md:flex-row md:datas-center w-full pl-14 md:pl-0 ${
                                     isEven ? "md:flex-row-reverse" : "md:flex-row"
                                 }`}
                                 initial={{ opacity: 0, y: 50 }}
@@ -65,15 +60,15 @@ export default function ExperienceSection() {
                                     isEven ? "md:text-left md:pr-12" : "md:text-right md:pl-12"
                                 }`}>
                                     <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-black dark:text-white mb-1">
-                                        {item.title}
+                                        {data.title}
                                     </h3>
 
                                     <p className="text-sm sm:text-base font-semibold text-[#0090FF] mb-2 sm:mb-3">
-                                        {item.role} <span className="text-gray-600 dark:text-gray-400 font-normal">| {item.year}</span>
+                                        {data.role} <span className="text-gray-600 dark:text-gray-400 font-normal">| {formatDate(data.startDate)}</span>
                                     </p>
 
                                     <p className="text-xs sm:text-sm md:text-base text-gray-600 dark:text-gray-300 leading-relaxed text-justify md:text-inherit">
-                                        {item.desc}
+                                        {data.description}
                                     </p>
                                 </div>
                             </motion.div>

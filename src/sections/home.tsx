@@ -1,5 +1,8 @@
 import ScrollIndicator from "@/components/ui/scroll-indicator"
+// import { fetchAboutData } from "@/store/about"
+import { useAppDispatch, useAppSelector } from "@/store/hooks"
 import { motion, type Variants } from "framer-motion"
+import { useEffect } from "react"
 
 const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -30,6 +33,13 @@ const lineVariants: Variants = {
 }
 
 export function HomeSection() {
+    const dispatch = useAppDispatch();
+    const { data } = useAppSelector((state) => state.about);
+
+    useEffect(() => {
+        // dispatch(fetchAboutData());
+    }, [dispatch]);
+    
     return (
         <>
             <motion.section
@@ -61,7 +71,7 @@ export function HomeSection() {
 
                     <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-center leading-tight">
                         <motion.div variants={itemVariants}>
-                            Muhamad Rafif
+                            { data?.name || "Muhamad Rafif" }
                         </motion.div>
                     </h1>
 

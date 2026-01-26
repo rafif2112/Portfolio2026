@@ -1,28 +1,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice, createAsyncThunk, type PayloadAction } from "@reduxjs/toolkit";
 import api from "@/config/api";
-import type { AboutData, AboutState } from "@/types/about";
 
-const initialState: AboutState = {
+const initialState: StatsState = {
   data: null,
   loading: false,
   error: null,
 };
 
-export const fetchAboutData = createAsyncThunk(
-  "about/fetchData",
+export const fetchStatsData = createAsyncThunk(
+  "stats/fetchData",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await api.get("/about");
-      return response.data.data as AboutData;
+      const response = await api.get("/stats");
+      return response.data.data as StatsData;
     } catch (error: any) {
       return rejectWithValue(error.response?.data || "Failed to fetch data");
     }
   },
 );
 
-const aboutSlice = createSlice({
-  name: "about",
+const statsSlice = createSlice({
+  name: "stats",
   initialState,
   reducers: {
     clearError: (state) => {
@@ -31,23 +30,23 @@ const aboutSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAboutData.pending, (state) => {
+      .addCase(fetchStatsData.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(
-        fetchAboutData.fulfilled,
-        (state, action: PayloadAction<AboutData>) => {
+        fetchStatsData.fulfilled,
+        (state, action: PayloadAction<StatsData>) => {
           state.loading = false;
           state.data = action.payload;
         },
       )
-      .addCase(fetchAboutData.rejected, (state, action) => {
+      .addCase(fetchStatsData.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });
   },
 });
 
-export const { clearError } = aboutSlice.actions;
-export default aboutSlice.reducer;
+export const { clearError } = statsSlice.actions;
+export default statsSlice.reducer;

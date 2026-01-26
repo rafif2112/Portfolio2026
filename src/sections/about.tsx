@@ -3,42 +3,27 @@ import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import Github from '@/assets/icons/github.svg';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { fetchAboutData } from '@/store/about';
+// import { fetchAboutData } from '@/store/about';
 import { useEffect } from 'react';
 import Gmail from '@/assets/icons/gmail.svg';
 import Linkedin from '@/assets/icons/linkedin.svg';
 import File from '@/assets/icons/file.svg';
+// import { fetchContactData } from '@/store/contact';
 
 export default function AboutSection() {
     const dispatch = useAppDispatch();
-    const { data, loading, error } = useAppSelector((state) => state.about);
+    const { data } = useAppSelector((state) => state.about);
+    const { data: contactData } = useAppSelector((state) => state.contact);
 
     useEffect(() => {
-        dispatch(fetchAboutData());
+        // dispatch(fetchAboutData());
+        // dispatch(fetchContactData());
     }, [dispatch]);
-
-    console.log('About Data:', { data, loading, error });
-
-    if (loading) {
-        return (
-            <section id='about' className="flex items-center justify-center min-h-[60dvh] px-4">
-                <div className="text-white text-xl">Loading...</div>
-            </section>
-        );
-    }
-
-    if (error) {
-        return (
-            <section id='about' className="flex items-center justify-center min-h-[60dvh] px-4">
-                <div className="text-red-500 text-xl">Error: {error}</div>
-            </section>
-        );
-    }
 
     return (
         <section 
             id='about' 
-            className="w-full flex flex-col lg:flex-row items-center min-h-auto lg:min-h-[60dvh] px-4 sm:px-8 py-12 lg:py-20 text-center lg:text-left relative">
+            className="w-full flex flex-col gap-8 sm:gap-0 lg:flex-row items-center min-h-auto lg:min-h-[60dvh] px-4 sm:px-8 py-12 lg:py-20 text-center lg:text-left relative">
             
             <motion.div
                 className='flex flex-col gap-6 flex-1 w-full order-2 lg:order-1'
@@ -52,33 +37,33 @@ export default function AboutSection() {
                         About Me
                     </h2>
                     <p className="w-full text-sm sm:text-base lg:text-lg text-justify text-gray-600 dark:text-gray-300 leading-relaxed">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare vestibulum erat, vel condimentum sem. Etiam augue diam, suscipit quis quam eu, iaculis commodo sapien. Nulla vel odio blandit, mollis ligula ullamcorper, placerat dui. Nunc varius vulputate eros accumsan congue. Phasellus non maximus risus. Fusce volutpat urna id erat ultrices gravida. Nulla sem mauris, ultricies eu faucibus vehicula, lacinia ut leo. Donec vel gravida sem, ac rutrum dui.
+                        { data?.biography }
                     </p>
                 </div>
 
                 <div className='flex flex-wrap justify-center lg:justify-start items-center gap-3 sm:gap-4 mt-4'>
-                    <a href="https://linkedin.com/in/muhamad-rafif22" target='_blank' rel="noreferrer">
+                    <a href={contactData?.linkedin} target='_blank' rel="noreferrer">
                         <Button className="bg-[#1F1C1C] text-white hover:bg-[#333030] flex items-center gap-2 px-4 h-10 text-xs sm:text-sm">
                             <img src={Linkedin} alt="LinkedIn" className='w-4 h-4 sm:w-5 sm:h-5' />
                             <span className="hidden min-[420px]:inline">LinkedIn</span>
                         </Button>
                     </a>
 
-                    <a href="https://github.com/rafif2112" target='_blank' rel="noreferrer">
+                    <a href={contactData?.github} target='_blank' rel="noreferrer">
                         <Button className="bg-[#1F1C1C] text-white hover:bg-[#333030] flex items-center gap-2 px-4 h-10 text-xs sm:text-sm">
                             <img src={Github} alt="GitHub" className='w-4 h-4 sm:w-5 sm:h-5' />
                             <span className="hidden min-[420px]:inline">Github</span>
                         </Button>
                     </a>
 
-                    <a href="mailto:mrafiff3@gmail.com" target='_blank' rel="noreferrer">
+                    <a href={`mailto:${contactData?.email}`} target='_blank' rel="noreferrer">
                         <Button className="bg-[#1F1C1C] text-white hover:bg-[#333030] flex items-center gap-2 px-4 h-10 text-xs sm:text-sm">
                             <img src={Gmail} alt="Email" className='w-4 h-4 sm:w-5 sm:h-5' />
                             <span className="hidden min-[420px]:inline">Email</span>
                         </Button>
                     </a>
 
-                    <a href="https://res.cloudinary.com/draylkswr/image/upload/v1768829353/files/CVMuhamadRafif.pdf" target='_blank' download rel="noreferrer">
+                    <a href={contactData?.cvUrl} target='_blank' download rel="noreferrer">
                         <Button className="bg-[#1F1C1C] text-white hover:bg-[#333030] flex items-center gap-2 px-4 h-10 text-xs sm:text-sm">
                             <img src={File} alt="CV" className='w-4 h-4 sm:w-5 sm:h-5' />
                             <span className="inline">CV</span>
@@ -88,7 +73,7 @@ export default function AboutSection() {
             </motion.div>
 
             <motion.div
-                className='relative w-full flex justify-end order-1 lg:order-2 lg:flex-1'
+                className='relative w-full flex justify-center sm:justify-end order-1 lg:order-2 lg:flex-1'
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: false, amount: 0.3 }}
@@ -107,7 +92,7 @@ export default function AboutSection() {
                     </motion.div>
 
                     <img 
-                        src={Profile} 
+                        src={data?.profileImageUrl || Profile} 
                         alt="Profile" 
                         className='object-cover w-full h-full rounded-2xl shadow-xl border-4 border-gray-800/20' 
                     />

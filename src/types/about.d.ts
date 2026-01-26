@@ -5,4 +5,10 @@ interface AboutData {
   profileImageUrl?: string;
 }
 
-export type { AboutData };
+interface AboutState {
+  data: AboutData | null;
+  loading: boolean;
+  error: string | null;
+}
+
+export type { AboutData, AboutState };

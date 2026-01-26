@@ -6,30 +6,16 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { motion } from "framer-motion"
-
-const skills = [
-    "JavaScript",
-    "TypeScript",
-    "React",
-    "Next.js",
-    "Node.js",
-    "Express",
-    "MongoDB",
-    "PostgreSQL",
-    "Tailwind CSS",
-    "Git",
-    "Docker",
-    "AWS",
-]
-const danLogo = "https://ui-avatars.com/api/?name=Dan&background=0D8ABC&color=fff&size=128";
-
-const firstRow = skills.slice(0, skills.length / 2)
-const secondRow = skills.slice(skills.length / 2)
+import { useAppDispatch, useAppSelector } from "@/store/hooks"
+import { useEffect } from "react"
+// import { fetchSkillData } from "@/store/skill"
 
 const SkillCard = ({
     skill: name,
+    imageUrl: imageUrl,
 }: {
     skill: string
+    imageUrl: string
 }) => {
     return (
         <figure
@@ -40,9 +26,9 @@ const SkillCard = ({
             <Tooltip>
                 <TooltipTrigger>
                     <img
-                        src={danLogo}
+                        src={imageUrl}
                         alt={name}
-                        className="h-12 w-12 sm:h-16 sm:w-16 rounded-lg object-cover"
+                        className="h-12 sm:h-16 rounded-lg object-cover"
                         draggable={false}
                         onDragStart={(e) => e.preventDefault()}
                     />
@@ -56,6 +42,16 @@ const SkillCard = ({
 }
 
 export function SkillSection() {
+    const dispatch = useAppDispatch();
+    const { data } = useAppSelector((state) => state.skill);
+
+    useEffect(() => {
+        // dispatch(fetchSkillData());
+    }, [dispatch]);
+
+    const firstRow = data.slice(0, Math.ceil(data.length / 2));
+    const secondRow = data.slice(Math.ceil(data.length / 2));
+
     return (
         <section id="skills" className="flex flex-col items-center justify-center min-h-[50dvh] px-4 py-8 text-center mb-8 sm:mb-20 mask-[linear-gradient(to_right,transparent,white_30%,white_70%,transparent)]">
             <motion.div 
@@ -79,13 +75,13 @@ export function SkillSection() {
                 transition={{ duration: 0.8 }}
             >
                 <Marquee className="[--duration:20s] sm:[--duration:15s]">
-                    {firstRow.map((skill) => (
-                        <SkillCard key={skill} skill={skill} />
+                    {firstRow.map((data) => (
+                        <SkillCard key={data.id} skill={data.name} imageUrl={data.imageUrl} />
                     ))}
                 </Marquee>
                 <Marquee reverse className="[--duration:20s] sm:[--duration:15s] ">
-                    {secondRow.map((skill) => (
-                        <SkillCard key={skill} skill={skill} />
+                    {secondRow.map((data) => (
+                        <SkillCard key={data.id} skill={data.name} imageUrl={data.imageUrl} />
                     ))}
                 </Marquee>
                 {/* <div className="from-background pointer-events-none absolute inset-y-0 -left-1 w-1/3 sm:w-1/4 bg-linear-to-r"></div>

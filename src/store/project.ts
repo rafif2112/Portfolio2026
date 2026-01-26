@@ -1,28 +1,31 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createSlice, createAsyncThunk, type PayloadAction } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createAsyncThunk,
+  type PayloadAction,
+} from "@reduxjs/toolkit";
 import api from "@/config/api";
-import type { AboutData, AboutState } from "@/types/about";
 
-const initialState: AboutState = {
-  data: null,
+const initialState: ProjectsState = {
+  data: [] as ProjectData[],
   loading: false,
   error: null,
 };
 
-export const fetchAboutData = createAsyncThunk(
-  "about/fetchData",
+export const fetchProjectData = createAsyncThunk(
+  "project/fetchData",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await api.get("/about");
-      return response.data.data as AboutData;
+      const response = await api.get("/projects/data");
+      return response.data.data as ProjectData[];
     } catch (error: any) {
       return rejectWithValue(error.response?.data || "Failed to fetch data");
     }
   },
 );
 
-const aboutSlice = createSlice({
-  name: "about",
+const projectSlice = createSlice({
+  name: "project",
   initialState,
   reducers: {
     clearError: (state) => {
@@ -31,23 +34,23 @@ const aboutSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAboutData.pending, (state) => {
+      .addCase(fetchProjectData.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(
-        fetchAboutData.fulfilled,
-        (state, action: PayloadAction<AboutData>) => {
+        fetchProjectData.fulfilled,
+        (state, action: PayloadAction<ProjectData[]>) => {
           state.loading = false;
           state.data = action.payload;
         },
       )
-      .addCase(fetchAboutData.rejected, (state, action) => {
+      .addCase(fetchProjectData.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });
   },
 });
 
-export const { clearError } = aboutSlice.actions;
-export default aboutSlice.reducer;
+export const { clearError } = projectSlice.actions;
+export default projectSlice.reducer;

@@ -1,28 +1,32 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createSlice, createAsyncThunk, type PayloadAction } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createAsyncThunk,
+  type PayloadAction,
+} from "@reduxjs/toolkit";
 import api from "@/config/api";
-import type { AboutData, AboutState } from "@/types/about";
+import type { ContactData, ContactState } from "@/types/contact";
 
-const initialState: AboutState = {
+const initialState: ContactState = {
   data: null,
   loading: false,
   error: null,
 };
 
-export const fetchAboutData = createAsyncThunk(
-  "about/fetchData",
+export const fetchContactData = createAsyncThunk(
+  "contact/fetchData",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await api.get("/about");
-      return response.data.data as AboutData;
+      const response = await api.get("/contact");
+      return response.data.data as ContactData;
     } catch (error: any) {
       return rejectWithValue(error.response?.data || "Failed to fetch data");
     }
   },
 );
 
-const aboutSlice = createSlice({
-  name: "about",
+const contactSlice = createSlice({
+  name: "contact",
   initialState,
   reducers: {
     clearError: (state) => {
@@ -31,23 +35,23 @@ const aboutSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAboutData.pending, (state) => {
+      .addCase(fetchContactData.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(
-        fetchAboutData.fulfilled,
-        (state, action: PayloadAction<AboutData>) => {
+        fetchContactData.fulfilled,
+        (state, action: PayloadAction<ContactData>) => {
           state.loading = false;
           state.data = action.payload;
         },
       )
-      .addCase(fetchAboutData.rejected, (state, action) => {
+      .addCase(fetchContactData.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });
   },
 });
 
-export const { clearError } = aboutSlice.actions;
-export default aboutSlice.reducer;
+export const { clearError } = contactSlice.actions;
+export default contactSlice.reducer;

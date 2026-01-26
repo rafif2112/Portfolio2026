@@ -6,9 +6,17 @@ import { motion } from "framer-motion"
 import { GithubIcon, InstagramIcon, LinkedinIcon } from "lucide-react"
 import Gmail from "@/assets/icons/gmail.svg";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button"
+import { useAppDispatch, useAppSelector } from "@/store/hooks"
+// import { fetchContactData } from "@/store/contact"
+import { useEffect } from "react"
 
 export default function ContactSection() {
-    const email = "mrafiff3@gmail.com";
+    const dispatch = useAppDispatch();
+    const { data } = useAppSelector((state) => state.contact);
+
+    useEffect(() => {
+        // dispatch(fetchContactData());
+    }, [dispatch]);
 
     return (
         <section id="contact" className="flex items-center min-h-auto lg:min-h-[70dvh] px-4 py-8 text-center">
@@ -39,28 +47,28 @@ export default function ContactSection() {
 
                             <div className="flex mt-6 gap-3">
                                 <div className="cursor-pointer bg-[#1F1C1C] hover:bg-[#2d2a2a] p-3 rounded-full">
-                                    <a href="https://linkedin.com/in/muhamad-rafif22" target="_blank" rel="noreferrer">
+                                    <a href={data?.linkedin} target="_blank" rel="noreferrer">
                                         <LinkedinIcon className="w-5 h-5 text-white" />
                                     </a>
                                 </div>
 
                                 {/* Email */}
                                 <div className="cursor-pointer bg-[#1F1C1C] hover:bg-[#2d2a2a] p-3 rounded-full">
-                                    <a href={`mailto:${email}`} target="_blank" rel="noreferrer">
+                                    <a href={`mailto:${data?.email}`} target="_blank" rel="noreferrer">
                                         <img src={Gmail} alt="Gmail Icon" className="w-5 h-5" />
                                     </a>
                                 </div>
 
                                 {/* github */}
                                 <div className="cursor-pointer bg-[#1F1C1C] hover:bg-[#2d2a2a] p-3 rounded-full">
-                                    <a href="https://github.com/rafif2112" target="_blank" rel="noreferrer">
+                                    <a href={data?.github} target="_blank" rel="noreferrer">
                                         <GithubIcon className="w-5 h-5 text-white" />
                                     </a>
                                 </div>
 
                                 {/* Instagram */}
                                 <div className="cursor-pointer bg-[#1F1C1C] hover:bg-[#2d2a2a] p-3 rounded-full">
-                                    <a href="https://instagram.com/rafiff.21" target="_blank" rel="noreferrer">
+                                    <a href={data?.instagram} target="_blank" rel="noreferrer">
                                         <InstagramIcon className="w-5 h-5 text-white" />
                                     </a>
                                 </div>
