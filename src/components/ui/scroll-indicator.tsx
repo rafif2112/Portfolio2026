@@ -26,18 +26,17 @@ export default function ScrollIndicator() {
             whileInView="visible"
             viewport={{ once: false, amount: 0.5 }}
         >
-            {/* Mouse Outline */}
             <motion.div
-                className="w-6.5 h-10.5 rounded-full border-2 border-white flex justify-center p-2"
+                className="w-5.5 h-9 sm:w-6.5 sm:h-10 rounded-full border-2 border-black dark:border-white flex justify-center p-2"
                 variants={itemVariants}
             >
                 <motion.div
-                    className="w-1.5 h-1.5 bg-white rounded-full mb-1"
+                    className="w-1.5 h-1.5 bg-black dark:bg-white rounded-full mb-1"
                     animate={{
                         y: [0, 12, 0],
                     }}
                     transition={{
-                        duration: 1.5,
+                        duration: 2,
                         repeat: Infinity,
                         repeatType: "loop",
                         ease: "easeInOut",
@@ -45,9 +44,8 @@ export default function ScrollIndicator() {
                 />
             </motion.div>
 
-            {/* Text "SCROLL" */}
             <motion.span
-                className="text-white text-xs font-light tracking-widest uppercase"
+                className="text-black dark:text-white text-xs font-medium tracking-widest uppercase"
                 variants={itemVariants}
             >
                 Scroll

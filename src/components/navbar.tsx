@@ -1,17 +1,36 @@
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
+import { useState, useEffect } from 'react'
+import { AnimatedThemeToggler } from './ui/animated-theme-toggler'
 
 function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 400)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <nav className="w-full py-4 px-8 flex justify-between items-center">
+    <nav className={`z-50 w-full py-4 px-4 sm:px-8 flex justify-between items-center transition-all duration-500 ease-in-out ${
+      isScrolled 
+        ? 'fixed top-0 bg-white/80 dark:bg-[#09090b]/80 backdrop-blur-md shadow-sm' 
+        : 'relative bg-transparent'
+    }`}>
       <motion.div
-        className="text-4xl font-bold"
+        className="text-2xl sm:text-4xl font-bold"
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         whileInView="visible"
         transition={{ duration: 0.5, type: "spring", stiffness: 300 }}
       >
-        R
+        <a href="#home">
+          R
+        </a>
       </motion.div>
 
       <motion.div
@@ -35,12 +54,14 @@ function Navbar() {
             whileTap={{ scale: 0.98 }}
           >
             <a href={`#${label.toLowerCase()}`}>
-              <Button variant="ghost" size="sm">
+              <Button variant="ghost" size="sm" className="text-xs sm:text-sm">
                 {label}
               </Button>
             </a>
           </motion.div>
         ))}
+
+        <AnimatedThemeToggler />
       </motion.div>
     </nav>
   )
