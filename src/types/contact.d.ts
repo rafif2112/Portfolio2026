@@ -15,4 +15,10 @@ interface ContactState {
     error: string | null;
 }
 
-export { ContactData, ContactState };
+interface ContactFormInput {
+    name: string;
+    email: string;
+    message: string;
+}
+
+export { ContactData, ContactState, ContactFormInput };

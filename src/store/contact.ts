@@ -25,6 +25,18 @@ export const fetchContactData = createAsyncThunk(
   },
 );
 
+export const sendContactForm = createAsyncThunk(
+  "contact/sendForm",
+  async (formData: { name: string; email: string; message: string }, { rejectWithValue }) => {
+    try {
+      const response = await api.post("/contact/send-email", formData);
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data || "Failed to send message");
+    }
+  },
+);
+
 const contactSlice = createSlice({
   name: "contact",
   initialState,
@@ -47,6 +59,17 @@ const contactSlice = createSlice({
         },
       )
       .addCase(fetchContactData.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(sendContactForm.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(sendContactForm.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(sendContactForm.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });
