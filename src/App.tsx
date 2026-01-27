@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Provider } from 'react-redux'
 import { store } from './store'
 import Navbar from './components/navbar'
@@ -25,6 +26,7 @@ import { useEffect, useState } from 'react'
 
 function InnerApp() {
   const [loading, setLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   const dispatch = useDispatch<AppDispatch>()
 
@@ -41,8 +43,21 @@ function InnerApp() {
         dispatch(fetchStatsData()),
       ]
 
-      await Promise.allSettled(promises)
-      if (mounted) setLoading(false)
+      const total = promises.length
+      let completed = 0
+
+      const wrap = (promise: Promise<any>) => {
+        return promise.finally(() => {
+          completed += 1
+          if (mounted) setProgress((completed / total) * 100)
+        })
+      }
+
+      await Promise.allSettled(promises.map(wrap))
+      if (mounted) {
+        setLoading(false)
+        setProgress(100)
+      }
     }
 
     loadInitialData()
@@ -56,7 +71,7 @@ function InnerApp() {
     <>
       {loading ? (
         <div className="min-h-dvh flex justify-center">
-          <LoadingAnimation />
+          <LoadingAnimation progress={progress} />
         </div>
       ) : (
         <div>
