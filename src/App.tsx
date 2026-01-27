@@ -22,6 +22,7 @@ import ExperienceSection from './sections/experience'
 import ContactSection from './sections/contact'
 import Footer from './components/footer'
 import { useEffect, useState } from 'react'
+import GithubSection from './sections/github'
 // import ToggleTool from './components/toggle-tool'
 
 function InnerApp() {
@@ -83,6 +84,7 @@ function InnerApp() {
             <ProjectSection />
             <SkillSection />
             <ExperienceSection />
+            <GithubSection />
             <ContactSection />
 
             <Footer />

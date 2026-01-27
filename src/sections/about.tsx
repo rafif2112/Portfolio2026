@@ -98,7 +98,7 @@ export default function AboutSection() {
                     />
 
                     <motion.div
-                        className='absolute z-10 bg-white py-1.5 sm:py-2 px-6 rounded-lg bottom-6 -right-8 sm:bottom-8 sm:-right-10 shadow-xl border border-gray-100'
+                        className='absolute z-10 bg-white py-1.5 sm:py-2 px-6 rounded-lg bottom-6 -right-4 sm:bottom-8 sm:-right-10 shadow-xl border border-gray-100'
                         transition={{ duration: 0.3 }}
                         whileHover={{ rotate: -10 }}
                     >
