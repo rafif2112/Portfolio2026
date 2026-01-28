@@ -83,7 +83,7 @@ export default function AboutSection() {
                     
                     <motion.div
                         className='absolute z-10 bg-white py-1.5 sm:py-2 px-6 rounded-lg top-6 -left-8 sm:top-8 sm:-left-10 shadow-xl border border-gray-100'
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.1 }}
                         whileHover={{ rotate: 10 }}
                     >
                         <p className='text-black font-semibold text-[10px] sm:text-xs lg:text-sm whitespace-nowrap'>
@@ -99,7 +99,7 @@ export default function AboutSection() {
 
                     <motion.div
                         className='absolute z-10 bg-white py-1.5 sm:py-2 px-6 rounded-lg bottom-6 -right-4 sm:bottom-8 sm:-right-10 shadow-xl border border-gray-100'
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.1 }}
                         whileHover={{ rotate: -10 }}
                     >
                         <p className='text-black font-semibold text-[10px] sm:text-xs lg:text-sm whitespace-nowrap'>

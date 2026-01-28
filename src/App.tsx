@@ -23,7 +23,6 @@ import ContactSection from './sections/contact'
 import Footer from './components/footer'
 import { useEffect, useState } from 'react'
 import GithubSection from './sections/github'
-// import ToggleTool from './components/toggle-tool'
 
 function InnerApp() {
   const [loading, setLoading] = useState(true);
@@ -50,14 +49,21 @@ function InnerApp() {
       const wrap = (promise: Promise<any>) => {
         return promise.finally(() => {
           completed += 1
-          if (mounted) setProgress((completed / total) * 100)
+          if (mounted) {
+            const percentage = Math.round((completed / total) * 100)
+            setProgress(percentage)
+          }
         })
       }
 
       await Promise.allSettled(promises.map(wrap))
+
       if (mounted) {
-        setLoading(false)
         setProgress(100)
+        
+        setTimeout(() => {
+            if (mounted) setLoading(false)
+        }, 1300)
       }
     }
 
@@ -71,11 +77,9 @@ function InnerApp() {
   return (
     <>
       {loading ? (
-        <div className="min-h-dvh flex justify-center">
-          <LoadingAnimation progress={progress} />
-        </div>
+        <LoadingAnimation progress={progress} />
       ) : (
-        <div>
+        <div className="animate-in fade-in duration-700">
           <Navbar />
           <main className="relative max-w-7xl mx-auto">
             <HomeSection />
@@ -86,7 +90,6 @@ function InnerApp() {
             <ExperienceSection />
             <GithubSection />
             <ContactSection />
-
             <Footer />
           </main>
         </div>
@@ -101,7 +104,6 @@ function App() {
       <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
         <SmoothScroll>
           <InnerApp />
-          {/* <ToggleTool /> */}
         </SmoothScroll>
       </ThemeProvider>
     </Provider>

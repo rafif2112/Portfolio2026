@@ -1,5 +1,5 @@
 interface ProjectData {
-    id: string;
+    _id: string;
     title: string;
     description: string;
     imageUrl: string;
@@ -8,6 +8,10 @@ interface ProjectData {
         demo: string;
         github: string;
     };
+}
+
+interface ProjectProps {
+    data: ProjectData;
 }
 
 interface ProjectsState {

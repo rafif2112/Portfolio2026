@@ -14,8 +14,24 @@ export default function GithubSection() {
     average: 0,
   });
 
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const updateTheme = () => setIsDark(document.documentElement.classList.contains('dark'));
+    updateTheme();
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
+
   const explicitTheme = {
-    light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
+    light: [
+      '#DFDFDF', 
+      '#9be9a8', 
+      '#40c463', 
+      '#30a14e', 
+      '#216e39'
+    ],
     dark: [
       '#292929',
       '#0e4429',
@@ -70,15 +86,15 @@ export default function GithubSection() {
           <StatCard label="Average" value={`${stats.average}/day`} />
         </div>
 
-        <div className="bg-[#151414] border border-[#2e2a2a] p-6 sm:p-8 rounded-lg transition-colors shadow-lg w-full flex justify-center items-center">
+        <div className="bg-[#ffffff] dark:bg-[#151414] border dark:border-[#2e2a2a] p-6 sm:p-8 rounded-lg transition-colors shadow-lg w-full flex justify-center items-center">
           <div className="overflow-x-auto w-full flex justify-center">
             <GitHubCalendar 
               username="rafif2112" 
               blockSize={16}
               blockMargin={4}
               fontSize={14}
-              theme={explicitTheme}
-              colorScheme="dark"
+              theme={isDark ? { dark: explicitTheme.dark as any } : { light: explicitTheme.light as any }}
+              colorScheme={isDark ? 'dark' : 'light'}
               showWeekdayLabels={true}
               style={{
                 color: '#9ca3af',
@@ -95,9 +111,9 @@ export default function GithubSection() {
 
 function StatCard({ label, value }: { label: string, value: string | number }) {
   return (
-    <div className="bg-[#151414] border border-[#2e2a2a] p-4 rounded-lg flex flex-col items-start justify-center shadow-md hover:border-[#383333] transition-colors">
-      <span className="text-gray-400 text-sm font-medium mb-1">{label}</span>
-      <span className="text-[#0090FF] text-2xl sm:text-3xl font-bold">{value}</span>
+    <div className="bg-[#ffffff] dark:bg-[#151414] border dark:border-[#2e2a2a] p-4 rounded-lg flex flex-col items-start justify-center shadow-md hover:border-[#383333] transition-colors">
+      <span className="text-gray-600 dark:text-gray-400 text-sm font-medium mb-1">{label}</span>
+      <span className="text-gray-900 dark:text-[#0090FF] text-2xl sm:text-3xl font-bold">{value}</span>
     </div>
   );
 }
