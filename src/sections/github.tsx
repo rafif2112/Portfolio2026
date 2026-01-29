@@ -2,6 +2,8 @@
 "use client";
 
 import { useEffect, useState } from 'react';
+
+let __githubDataFetched = false;
 import { GitHubCalendar } from 'react-github-calendar';
 import { motion } from "framer-motion";
 import HeaderSection from '@/components/header-section';
@@ -26,10 +28,10 @@ export default function GithubSection() {
 
   const explicitTheme = {
     light: [
-      '#DFDFDF', 
-      '#9be9a8', 
-      '#40c463', 
-      '#30a14e', 
+      '#DFDFDF',
+      '#9be9a8',
+      '#40c463',
+      '#30a14e',
       '#216e39'
     ],
     dark: [
@@ -42,6 +44,9 @@ export default function GithubSection() {
   };
 
   useEffect(() => {
+    if (__githubDataFetched) return;
+    __githubDataFetched = true;
+
     const fetchGithubData = async () => {
       try {
         const username = "rafif2112";
@@ -69,14 +74,14 @@ export default function GithubSection() {
 
   return (
     <section className="py-20 px-4 flex text-center">
-      <motion.div 
+      <motion.div
         className="w-full mx-auto flex flex-col gap-8"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: false, amount: 0.1 }}
       >
-        
+
         <HeaderSection title='Github Contributions' text='My Coding activity over the last year' />
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
@@ -86,10 +91,10 @@ export default function GithubSection() {
           <StatCard label="Average" value={`${stats.average}/day`} />
         </div>
 
-        <div className="bg-[#ffffff] dark:bg-[#151414] border dark:border-[#2e2a2a] p-6 sm:p-8 rounded-lg transition-colors shadow-lg w-full flex justify-center items-center">
+        <div className="bg-white/60 dark:bg-[#151414] border dark:border-[#2e2a2a] p-6 sm:p-8 rounded-lg transition-colors shadow-lg w-full flex justify-center items-center">
           <div className="overflow-x-auto w-full flex justify-center">
-            <GitHubCalendar 
-              username="rafif2112" 
+            <GitHubCalendar
+              username="rafif2112"
               blockSize={16}
               blockMargin={4}
               fontSize={14}
@@ -111,7 +116,7 @@ export default function GithubSection() {
 
 function StatCard({ label, value }: { label: string, value: string | number }) {
   return (
-    <div className="bg-[#ffffff] dark:bg-[#151414] border dark:border-[#2e2a2a] p-4 rounded-lg flex flex-col items-start justify-center shadow-md hover:border-[#383333] transition-colors">
+    <div className="bg-white/60 dark:bg-[#151414] border dark:border-[#2e2a2a] p-4 rounded-lg flex flex-col items-start justify-center shadow-md hover:border-[#383333] transition-colors">
       <span className="text-gray-600 dark:text-gray-400 text-sm font-medium mb-1">{label}</span>
       <span className="text-gray-900 dark:text-[#0090FF] text-2xl sm:text-3xl font-bold">{value}</span>
     </div>

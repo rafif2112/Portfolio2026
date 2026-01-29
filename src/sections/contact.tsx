@@ -14,6 +14,7 @@ import { useEffect } from "react"
 import type { ContactFormInput } from "@/types/contact"
 import { Toaster } from "@/components/ui/sonner"
 import { toast } from "sonner"
+import { TextAnimate } from "@/components/ui/text-animate"
 
 export default function ContactSection() {
     const dispatch = useAppDispatch();
@@ -62,9 +63,12 @@ export default function ContactSection() {
                     <div className="flex flex-col md:flex-row gap-6">
                         <div className="w-full flex flex-col justify-between">
                             <div className="mb-6">
-                                <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base text-justify">
+                                {/* <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base text-justify">
                                     Whether you have a question, a project idea, or just want to say hello, feel free to reach out! I&apos;m always open to discussing new opportunities and collaborations.
-                                </p>
+                                </p> */}
+                                <TextAnimate className="text-gray-600 dark:text-gray-400 text-sm sm:text-base text-justify" animation="slideUp" by="character">
+                                    Whether you have a question, a project idea, or just want to say hello, feel free to reach out! I&apos;m always open to discussing new opportunities and collaborations.
+                                </TextAnimate>
                             </div>
 
                             <div className="flex flex-col">
@@ -138,7 +142,7 @@ export default function ContactSection() {
 
                             <InteractiveHoverButton
                                 type="submit"
-                                className={`px-4 sm:px-6 h-8 border border-[#2e2b2b] hover:dark:border-[#efe9e9] sm:h-11 self-start text-sm sm:text-base ${loading ? 'flex items-center gap-2 justify-center' : ''}`}
+                                className={`px-4 sm:px-6 h-10 border border-[#2e2b2b] hover:dark:border-[#efe9e9] sm:h-11 self-start text-sm sm:text-base ${loading ? 'flex items-center gap-2 justify-center' : ''}`}
                                 disabled={loading}
                             >
                                 {loading ? (

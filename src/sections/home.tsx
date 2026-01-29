@@ -91,7 +91,7 @@ export function HomeSection() {
                         </motion.span>
                     </div>
                 </div>
-
+                    
             </motion.section>
             <ScrollIndicator />
         </>

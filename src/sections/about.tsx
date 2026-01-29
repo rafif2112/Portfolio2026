@@ -23,7 +23,7 @@ export default function AboutSection() {
     return (
         <section 
             id='about' 
-            className="w-full flex flex-col gap-8 sm:gap-0 lg:flex-row items-center min-h-auto lg:min-h-[60dvh] px-4 sm:px-8 py-12 lg:py-20 text-center lg:text-left relative">
+            className="w-full overflow-hidden flex flex-col gap-8 lg:gap-0 lg:flex-row items-center min-h-auto lg:min-h-[60dvh] px-4 sm:px-8 py-12 lg:py-20 text-center lg:text-left relative">
             
             <motion.div
                 className='flex flex-col gap-6 flex-1 w-full order-2 lg:order-1'
@@ -73,7 +73,7 @@ export default function AboutSection() {
             </motion.div>
 
             <motion.div
-                className='relative w-full flex justify-center sm:justify-end order-1 lg:order-2 lg:flex-1'
+                className='relative w-full flex justify-center lg:justify-end order-1 lg:order-2 lg:flex-1'
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: false, amount: 0.3 }}

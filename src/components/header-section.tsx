@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { TextAnimate } from "./ui/text-animate";
 
 export default function HeaderSection({ title, text, className }: { title: string, text: string, className?: string }) {
     return (
@@ -10,9 +11,12 @@ export default function HeaderSection({ title, text, className }: { title: strin
             transition={{ duration: 0.8 }}
         >
             <h2 className="text-3xl sm:text-4xl font-bold mb-2 text-black dark:text-white">{title}</h2>
-            <p className="max-w-3xl text-sm sm:text-base text-justify text-gray-500 dark:text-gray-400">
+            {/* <p className="max-w-3xl text-sm sm:text-base text-justify text-gray-500 dark:text-gray-400">
                 {text}
-            </p>
+            </p> */}
+            <TextAnimate className="max-w-3xl text-sm sm:text-base text-justify text-gray-500 dark:text-gray-400" animation="slideUp" by="word">
+                {text}
+            </TextAnimate>
         </motion.div>
 
         // <div className="flex items-start flex-col">
