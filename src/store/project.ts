@@ -24,6 +24,18 @@ export const fetchProjectData = createAsyncThunk(
   },
 );
 
+export const fetchProjectBySlug = createAsyncThunk(
+  "project/fetchBySlug",
+  async (slug: string, { rejectWithValue }) => {
+    try {
+      const response = await api.get(`/projects/${slug}`);
+      return response.data.data as ProjectData;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data || "Failed to fetch project");
+    }
+  },
+);
+
 const projectSlice = createSlice({
   name: "project",
   initialState,
@@ -46,6 +58,35 @@ const projectSlice = createSlice({
         },
       )
       .addCase(fetchProjectData.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(fetchProjectBySlug.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        fetchProjectBySlug.fulfilled,
+        (state, action: PayloadAction<ProjectData>) => {
+          state.loading = false;
+          const existingIndex =
+            state.data?.findIndex(
+              (project) => project.slug === action.payload.slug,
+            ) ?? -1;
+          if (existingIndex >= 0) {
+            if (state.data) {
+              state.data[existingIndex] = action.payload;
+            }
+          } else {
+            if (state.data) {
+              state.data.push(action.payload);
+            } else {
+              state.data = [action.payload];
+            }
+          }
+        },
+      )
+      .addCase(fetchProjectBySlug.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });

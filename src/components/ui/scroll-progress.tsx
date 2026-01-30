@@ -17,7 +17,7 @@ export function ScrollProgress({
   return (
     <motion.div
       className={cn(
-        "z-50 h-px origin-left bg-black dark:bg-white",
+        "z-50 h-px origin-left bg-black dark:bg-white/70",
         className
       )}
       style={{

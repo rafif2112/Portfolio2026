@@ -8,10 +8,10 @@ import CertificatesPage from '@/pages/certificates';
 export function AppRoutes() {
     return (
         <Routes>
-            <Route path="/" element={<HomePage/>} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/projects/*" element={<ProjectsPage />} />
             <Route path="/certificates" element={<CertificatesPage />} />
-            <Route path="/projects/:id" element={<DetailProject />} />
+            <Route path="/projects/:slug" element={<DetailProject />} />
 
             {/* error page 404 */}
             <Route path="*" element={<NotFoundPage />} />
