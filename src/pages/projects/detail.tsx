@@ -8,12 +8,13 @@ import { Badge } from "@/components/ui/badge";
 // import { ScrollArea } from "@/components/ui/scroll-area";
 import { Github, Globe, ExternalLink, ArrowLeft, Code } from "lucide-react";
 import NotFoundPage from "../error/404";
+import Loading from "@/components/loading";
 
 export default function DetailProject() {
     const { slug } = useParams<{ slug: string }>();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const { data } = useAppSelector((state) => state.project);
+    const { data, loading } = useAppSelector((state) => state.project);
     const [project, setProject] = useState<ProjectData | null>(null);
 
     useEffect(() => {
@@ -37,6 +38,12 @@ export default function DetailProject() {
         }
     }
 
+    if (loading) {
+        return (
+            <Loading />
+        );
+    }
+
     if (!project) {
         return (
             <NotFoundPage />
@@ -45,7 +52,6 @@ export default function DetailProject() {
 
     return (
         <div className="min-h-screen bg-background">
-            {/* Header dengan tombol back */}
             <div className="px-2">
                 <Button
                     variant="secondary"
@@ -57,7 +63,6 @@ export default function DetailProject() {
                 </Button>
             </div>
 
-            {/* Hero Image */}
             <div className="w-full px-2 overflow-hidden">
                 <div className="container mx-auto">
                     <div className="relative w-full aspect-video max-h-160 bg-muted overflow-hidden group">
@@ -76,16 +81,13 @@ export default function DetailProject() {
                 </div>
             </div>
 
-            {/* Content */}
             <div className="container mx-auto px-4 py-12">
                 <div className="mx-auto">
-                    {/* Title & Technologies */}
                     <div className="space-y-6">
                         <div className="flex justify-between items-center">
                             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
                                 {project.title}
                             </h1>
-                            {/* type */}
                             <Badge
                                 className="px-4 py-2 bg-[#E0E0E0] dark:bg-[#1F1C1C] text-black dark:text-white text-sm sm:text-md rounded-md font-semibold"
                             >
@@ -106,7 +108,6 @@ export default function DetailProject() {
                         </div>
                     </div>
 
-                    {/* Action Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4 py-8 border-b">
                         {project.link?.demo && (
                             <Button
@@ -137,9 +138,7 @@ export default function DetailProject() {
                         )}
                     </div>
 
-                    {/* Description */}
                     <div className="py-8">
-                        {/* <h2 className="text-2xl font-bold mb-6 text-foreground">About This Project</h2> */}
 
                         <div
                             className="prose prose-slate dark:prose-invert max-w-none text-muted-foreground flex flex-col gap-1 typography [&_ol]:list-decimal [&_ol]:pl-6 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:marker:text-primary [&_.ql-align-justify]:text-justify [&_.ql-align-center]:text-center [&_.ql-align-right]:text-right prose-p:leading-relaxed prose-a:text-blue-500 hover:prose-a:underline"
