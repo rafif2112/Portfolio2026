@@ -13,6 +13,7 @@ import { fetchStatsData } from './store/stats'
 import { ThemeProvider } from './utils/theme-provider'
 import SmoothScroll from './components/smooth-scroll'
 import Footer from './components/footer'
+
 import { useEffect } from 'react'
 
 // module-level guard to avoid duplicate initial fetches (React StrictMode mounts twice in dev)

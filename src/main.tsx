@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 // import { createRoot } from 'react-dom/client'
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {Helmet} from "react-helmet";
 import './index.css'
 import App from './App.tsx'
 // import { Swiper, SwiperSlide } from 'swiper/react';
@@ -16,6 +17,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Helmet>
+      <RouterProvider router={router} />
+    </Helmet>
   </StrictMode>,
 )
