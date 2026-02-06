@@ -92,12 +92,13 @@ function Navbar() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.80 }}
             onClick={openDropdown}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
           >
             {!isOpen ? (
               <Menu className="w-6 h-6" />
-              ) : (
-                <X className="w-6 h-6" />
-              )
+            ) : (
+              <X className="w-6 h-6" />
+            )
             }
           </motion.button>
 

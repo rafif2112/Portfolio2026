@@ -124,7 +124,7 @@ export default function FooterV1() {
 
       <div className="mx-auto relative z-10 flex flex-col items-center text-center">
         {/* Bottom Bar */}
-        <div className="mt-20 py-8 border-t border-black/30 dark:border-white/10 w-full flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 gap-4">
+        <div className="mt-20 py-8 border-t border-black/30 dark:border-white/10 w-full flex flex-col md:flex-row justify-between items-center text-sm text-gray-600 dark:text-gray-400 gap-4">
           <p>© {new Date().getFullYear()} Muhamad Rafif. All rights reserved.</p>
           <p>Crafted with code & creativity.</p>
         </div>

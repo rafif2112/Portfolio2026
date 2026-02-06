@@ -29,6 +29,7 @@ const SkillCard = ({
                     <img
                         src={imageUrl}
                         alt={name}
+                        loading="lazy"
                         className="h-12 sm:h-16 rounded-lg object-cover"
                         draggable={false}
                         onDragStart={(e) => e.preventDefault()}

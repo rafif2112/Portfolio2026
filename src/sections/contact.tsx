@@ -78,21 +78,21 @@ export default function ContactSection() {
 
                                 <div className="flex mt-6 gap-3">
                                     <div className="cursor-pointer bg-[#1F1C1C] hover:bg-[#2d2a2a] p-3 rounded-full">
-                                        <a href={data?.linkedin} target="_blank" rel="noreferrer">
+                                        <a href={data?.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
                                             <LinkedinIcon className="w-5 h-5 text-white" />
                                         </a>
                                     </div>
 
                                     {/* Email */}
                                     <div className="cursor-pointer bg-[#1F1C1C] hover:bg-[#2d2a2a] p-3 rounded-full">
-                                        <a href={`mailto:${data?.email}`} target="_blank" rel="noreferrer">
+                                        <a href={`mailto:${data?.email}`} target="_blank" rel="noreferrer" aria-label="Email">
                                             <img src={Gmail} alt="Gmail Icon" className="w-5 h-5" />
                                         </a>
                                     </div>
 
                                     {/* github */}
                                     <div className="cursor-pointer bg-[#1F1C1C] hover:bg-[#2d2a2a] p-3 rounded-full">
-                                        <a href={data?.github} target="_blank" rel="noreferrer">
+                                        <a href={data?.github} target="_blank" rel="noreferrer" aria-label="GitHub">
                                             <GithubIcon className="w-5 h-5 text-white" />
                                         </a>
                                     </div>

@@ -56,6 +56,9 @@ export default function ProjectSection() {
                                                     <img
                                                         src={project.imageUrl}
                                                         alt={project.title}
+                                                        loading="lazy"
+                                                        width={400}
+                                                        height={200}
                                                         className="w-full h-40 sm:h-48 object-cover transition-transform duration-500 hover:scale-105"
                                                         draggable={false}
                                                     />

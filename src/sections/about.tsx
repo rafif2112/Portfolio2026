@@ -62,28 +62,28 @@ export default function AboutSection() {
                     <div className='flex flex-wrap justify-center lg:justify-start items-center gap-3 sm:gap-4 mt-4'>
                         <a href={contactData?.linkedin} target='_blank' rel="noreferrer">
                             <Button className="bg-[#1F1C1C] text-white hover:bg-[#333030] flex items-center gap-2 px-4 h-10 text-xs sm:text-sm">
-                                <img src={Linkedin} alt="LinkedIn" className='w-4 h-4 sm:w-5 sm:h-5' />
+                                <img src={Linkedin} alt="LinkedIn" width={20} height={20} className='w-4 h-4 sm:w-5 sm:h-5' />
                                 <span className="hidden min-[420px]:inline">LinkedIn</span>
                             </Button>
                         </a>
 
                         <a href={contactData?.github} target='_blank' rel="noreferrer">
                             <Button className="bg-[#1F1C1C] text-white hover:bg-[#333030] flex items-center gap-2 px-4 h-10 text-xs sm:text-sm">
-                                <img src={Github} alt="GitHub" className='w-4 h-4 sm:w-5 sm:h-5' />
+                                <img src={Github} alt="GitHub" width={20} height={20} className='w-4 h-4 sm:w-5 sm:h-5' />
                                 <span className="hidden min-[420px]:inline">Github</span>
                             </Button>
                         </a>
 
                         <a href={`mailto:${contactData?.email}`} target='_blank' rel="noreferrer">
                             <Button className="bg-[#1F1C1C] text-white hover:bg-[#333030] flex items-center gap-2 px-4 h-10 text-xs sm:text-sm">
-                                <img src={Gmail} alt="Email" className='w-4 h-4 sm:w-5 sm:h-5' />
+                                <img src={Gmail} alt="Email" width={20} height={20} className='w-4 h-4 sm:w-5 sm:h-5' />
                                 <span className="hidden min-[420px]:inline">Email</span>
                             </Button>
                         </a>
 
                         <a href={contactData?.cvUrl} target='_blank' download rel="noreferrer">
                             <Button className="bg-[#1F1C1C] text-white hover:bg-[#333030] flex items-center gap-2 px-4 h-10 text-xs sm:text-sm">
-                                <img src={File} alt="CV" className='w-4 h-4 sm:w-5 sm:h-5' />
+                                <img src={File} alt="CV" width={20} height={20} className='w-4 h-4 sm:w-5 sm:h-5' />
                                 <span className="inline">CV</span>
                             </Button>
                         </a>
@@ -113,6 +113,9 @@ export default function AboutSection() {
                     <img
                         src={data?.profileImageUrl || Profile}
                         alt="Profile"
+                        width={400}
+                        height={400}
+                        loading="lazy"
                         className='object-cover w-full h-full rounded-2xl shadow-xl border-4 border-gray-800/20'
                     />
 

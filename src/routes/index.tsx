@@ -1,9 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
-import HomePage from '@/pages/home';
-import NotFoundPage from '@/pages/error/404';
-import DetailProject from '@/pages/projects/detail';
-import ProjectsPage from '@/pages/projects';
-import CertificatesPage from '@/pages/certificates';
+import { lazy } from 'react';
+// import Loading from '@/components/loading';
+
+const HomePage = lazy(() => import('@/pages/home'));
+const NotFoundPage = lazy(() => import('@/pages/error/404'));
+const DetailProject = lazy(() => import('@/pages/projects/detail'));
+const ProjectsPage = lazy(() => import('@/pages/projects'));
+const CertificatesPage = lazy(() => import('@/pages/certificates'));
 
 export function AppRoutes() {
     return (
