@@ -1,7 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
 import { lazy } from 'react';
-// import Loading from '@/components/loading';
-
 const HomePage = lazy(() => import('@/pages/home'));
 const NotFoundPage = lazy(() => import('@/pages/error/404'));
 const DetailProject = lazy(() => import('@/pages/projects/detail'));
@@ -10,16 +8,14 @@ const CertificatesPage = lazy(() => import('@/pages/certificates'));
 
 export function AppRoutes() {
     return (
-        // <Suspense fallback={<Loading />}>
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/projects/*" element={<ProjectsPage />} />
-                <Route path="/certificates" element={<CertificatesPage />} />
-                <Route path="/projects/:slug" element={<DetailProject />} />
+        <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/projects/*" element={<ProjectsPage />} />
+            <Route path="/certificates" element={<CertificatesPage />} />
+            <Route path="/projects/:slug" element={<DetailProject />} />
 
-                {/* error page 404 */}
-                <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-        // </Suspense>
+            {/* error page 404 */}
+            <Route path="*" element={<NotFoundPage />} />
+        </Routes>
     );
 }
