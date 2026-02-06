@@ -5,22 +5,21 @@ import { motion, type Variants } from "framer-motion"
 import { useEffect } from "react"
 
 const containerVariants: Variants = {
-    hidden: { opacity: 0 },
+    hidden: {},
     visible: {
-        opacity: 1,
         transition: {
-            staggerChildren: 0.1, // Reduced from 0.3 for faster LCP
-            delayChildren: 0,     // Reduced from 0.2
+            staggerChildren: 0.08,
+            delayChildren: 0,
         },
     },
 }
 
 const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 10 },
     visible: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.4, ease: "easeOut" }, // Reduced duration
+        transition: { duration: 0.3, ease: "easeOut" },
     },
 }
 
@@ -28,7 +27,7 @@ const lineVariants: Variants = {
     hidden: { scaleX: 0 },
     visible: {
         scaleX: 1,
-        transition: { duration: 1, ease: "easeInOut" },
+        transition: { duration: 0.6, ease: "easeOut" },
     },
 }
 
@@ -46,8 +45,7 @@ export function HomeSection() {
                 id="home"
                 className="flex flex-col items-center justify-center min-h-[80dvh] px-4 sm:px-8 w-full overflow-hidden"
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false, amount: 0.3 }}
+                animate="visible"
                 variants={containerVariants}
             >
                 <div className="flex w-full max-w-70 sm:max-w-xl md:max-w-2xl items-center gap-3 sm:gap-6 md:gap-10">

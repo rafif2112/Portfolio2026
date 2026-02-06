@@ -10,14 +10,16 @@ const CertificatesPage = lazy(() => import('@/pages/certificates'));
 
 export function AppRoutes() {
     return (
-        <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/projects/*" element={<ProjectsPage />} />
-            <Route path="/certificates" element={<CertificatesPage />} />
-            <Route path="/projects/:slug" element={<DetailProject />} />
+        // <Suspense fallback={<Loading />}>
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/projects/*" element={<ProjectsPage />} />
+                <Route path="/certificates" element={<CertificatesPage />} />
+                <Route path="/projects/:slug" element={<DetailProject />} />
 
-            {/* error page 404 */}
-            <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+                {/* error page 404 */}
+                <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+        // </Suspense>
     );
 }

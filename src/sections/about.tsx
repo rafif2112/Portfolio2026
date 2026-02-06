@@ -1,4 +1,4 @@
-import Profile from '@/assets/images/Profile.jpeg';
+import Profile from '@/assets/images/Profile.webp';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import Github from '@/assets/icons/github.svg';

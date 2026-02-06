@@ -59,7 +59,7 @@ function InnerApp() {
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:image" content="https://muhamadrafif.vercel.app/og-image.png" />
       </Helmet>
-      <div className="animate-in fade-in duration-700">
+      <div>
         <Navbar />
         <main className="relative max-w-7xl mx-auto">
           <Layouts>
