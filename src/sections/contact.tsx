@@ -52,7 +52,7 @@ export default function ContactSection() {
                     className='flex flex-col gap-8 lg:gap-12 flex-1 w-full'
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, amount: 0.5 }}
+                    viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.8 }}
                 >
                     <HeaderSection

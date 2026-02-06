@@ -24,7 +24,7 @@ export default function ScrollIndicator() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, amount: 0.5 }}
+            viewport={{ once: true, amount: 0.5 }}
         >
             <motion.div
                 className="w-5.5 h-9 sm:w-6.5 sm:h-10 rounded-full border-2 border-black dark:border-white flex justify-center p-2"

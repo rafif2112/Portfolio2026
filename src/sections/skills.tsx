@@ -55,11 +55,11 @@ export function SkillSection() {
 
     return (
         <section id="skills" className="flex flex-col items-center justify-center min-h-[50dvh] px-4 py-8 text-center mb-8 sm:mb-20 mask-[linear-gradient(to_right,transparent,white_30%,white_70%,transparent)]">
-            <motion.div 
+            <motion.div
                 className="flex flex-col mb-8 sm:mb-12"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.8 }}
+                viewport={{ once: true, amount: 0.8 }}
                 transition={{ duration: 0.8 }}
             >
                 <h2 className="text-3xl sm:text-4xl font-bold mb-2 text-black dark:text-white">Technical Skills</h2>
@@ -68,11 +68,11 @@ export function SkillSection() {
                 </p>
             </motion.div>
 
-            <motion.div 
+            <motion.div
                 className="relative flex w-full flex-col items-center justify-center overflow-hidden"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.8 }}
+                viewport={{ once: true, amount: 0.8 }}
                 transition={{ duration: 0.8 }}
             >
                 {loading ? (

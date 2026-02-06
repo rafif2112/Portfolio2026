@@ -47,7 +47,7 @@ export default function AboutSection() {
                     className='flex flex-col gap-6 flex-1 w-full order-2 lg:order-1'
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: false, amount: 0.3 }}
+                    viewport={{ once: true, amount: 0.3 }}
                     transition={{ duration: 0.8 }}
                 >
                     <div className="flex items-center lg:items-start flex-col gap-4">
@@ -95,7 +95,7 @@ export default function AboutSection() {
                 className='relative w-full flex justify-center lg:justify-end order-1 lg:order-2 lg:flex-1'
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.8 }}
             >
                 <div className='relative w-full max-w-70 sm:max-w-87.5 lg:max-w-100 aspect-square'>
