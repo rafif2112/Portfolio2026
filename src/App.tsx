@@ -44,7 +44,7 @@ function InnerApp() {
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Muhamad Rafif - Full Stack Developer</title>
+        <title>Muhamad Rafif - Fullstack Developer</title>
         <link rel="canonical" href="https://muhamadrafif.vercel.app/" />
         <meta name="description" content="Portfolio Fullstack Developer spesialis React, Vue & Laravel." />
         <meta name="keywords" content="Muhamad Rafif, Rafif, Fullstack Developer, React Developer, Vue Developer, Laravel Developer, Portfolio, Web Developer, Freelance Developer" />

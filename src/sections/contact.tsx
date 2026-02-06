@@ -36,7 +36,7 @@ export default function ContactSection() {
         };
 
         try {
-            await dispatch(sendContactForm(formData));
+            await dispatch(sendContactForm(formData)).unwrap();
             toast.success("Message sent successfully!");
             form.reset();
         } catch (err: any) {
