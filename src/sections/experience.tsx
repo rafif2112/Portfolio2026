@@ -1,4 +1,5 @@
 import HeaderSection from "@/components/header-section";
+import { Skeleton } from "@/components/ui/skeleton";
 // import { fetchExperienceData } from "@/store/experience";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import formatDate from "@/utils/formatDate";
@@ -7,7 +8,7 @@ import { useEffect } from "react";
 
 export default function ExperienceSection() {
     const dispatch = useAppDispatch();
-    const { data } = useAppSelector((state) => state.experience);
+    const { data, loading } = useAppSelector((state) => state.experience);
 
     useEffect(() => {
         // dispatch(fetchExperienceData());
@@ -21,7 +22,7 @@ export default function ExperienceSection() {
             />
 
             <div className="relative w-full mx-auto">
-                
+
                 <motion.div
                     className="absolute top-0 bottom-0 w-0.5 bg-gray-700/50 md:bg-gray-700/50 left-6 md:left-1/2 transform md:-translate-x-1/2"
                     initial={{ height: 0 }}
@@ -29,7 +30,7 @@ export default function ExperienceSection() {
                     viewport={{ once: false, amount: 0.1 }}
                     transition={{ duration: 1.5, ease: "easeInOut" }}
                 >
-                    <motion.div 
+                    <motion.div
                         className="w-full bg-black dark:bg-white"
                         initial={{ height: 0 }}
                         whileInView={{ height: "100%" }}
@@ -37,44 +38,71 @@ export default function ExperienceSection() {
                     />
                 </motion.div>
 
-                <div className="flex flex-col space-y-12 md:space-y-24">
-                    {data?.map((data, index) => {
-                        const isEven = index % 2 !== 0;
+                {loading ? (
+                    <div className="flex flex-col space-y-12 md:space-y-16">
+                        {Array.from({ length: 2 }).map((_, i) => {
+                            const isEven = i % 2 !== 0;
 
-                        return (
-                            <motion.div
-                                key={index}
-                                className={`relative flex flex-col md:flex-row md:datas-center w-full pl-14 md:pl-0 ${
-                                    isEven ? "md:flex-row-reverse" : "md:flex-row"
-                                }`}
-                                initial={{ opacity: 0, y: 50 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: index * 0.2 }}
-                                viewport={{ once: false, amount: 0.5 }}
-                            >
-                                <div className="hidden md:block md:w-1/2" />
+                            return (
+                                <div
+                                    key={i}
+                                    className={`relative flex flex-col md:flex-row md:items-center w-full pl-14 md:pl-0 ${isEven ? "md:flex-row-reverse" : "md:flex-row"
+                                        }`}
+                                >
+                                    <div className="hidden md:block md:w-1/2" />
 
-                                <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 top-0 md:top-1/2 md:-translate-y-1/2 w-4 h-4 rounded-full border-4 border-black bg-white z-10 dark:shadow-[0_0_0_4px_rgba(255,255,255,0.2)]" />
+                                    <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 top-0 md:top-1/2 md:-translate-y-1/2 w-4 h-4 bg-muted rounded-full border-4 border-background z-10" />
 
-                                <div className={`w-full md:w-1/2 px-2 sm:px-4 md:py-4 ${
-                                    isEven ? "md:text-left md:pr-12" : "md:text-right md:pl-12"
-                                }`}>
-                                    <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-black dark:text-white mb-1">
-                                        {data.title}
-                                    </h3>
-
-                                    <p className="text-sm sm:text-base font-semibold text-[#0090FF] mb-2 sm:mb-3">
-                                        {data.role} <span className="text-gray-600 dark:text-gray-400 font-normal">| {formatDate(data.startDate)}</span>
-                                    </p>
-
-                                    <p className="text-xs sm:text-sm md:text-base text-gray-600 dark:text-gray-300 leading-relaxed text-justify md:text-inherit">
-                                        {data.description}
-                                    </p>
+                                    <div
+                                        className={`w-full md:w-1/2 px-2 sm:px-4 md:py-4 flex flex-col gap-2 ${isEven ? "md:items-start md:pr-12" : "md:items-end md:pl-12"
+                                            }`}
+                                    >
+                                        <Skeleton className="w-32 sm:w-48 h-6 sm:h-8 rounded-md" />
+                                        <Skeleton className="w-24 sm:w-32 h-4 sm:h-6 rounded-md" />
+                                        <Skeleton className="w-full h-16 sm:h-20 rounded-md" />
+                                    </div>
                                 </div>
-                            </motion.div>
-                        );
-                    })}
-                </div>
+                            );
+                        })}
+                    </div>
+                ) : (
+                    <div className="flex flex-col space-y-12 md:space-y-24">
+                        {data?.map((data, index) => {
+                            const isEven = index % 2 !== 0;
+
+                            return (
+                                <motion.div
+                                    key={index}
+                                    className={`relative flex flex-col md:flex-row md:datas-center w-full pl-14 md:pl-0 ${isEven ? "md:flex-row-reverse" : "md:flex-row"
+                                        }`}
+                                    initial={{ opacity: 0, y: 50 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: index * 0.2 }}
+                                    viewport={{ once: false, amount: 0.5 }}
+                                >
+                                    <div className="hidden md:block md:w-1/2" />
+
+                                    <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 top-0 md:top-1/2 md:-translate-y-1/2 w-4 h-4 rounded-full border-4 border-black bg-white z-10 dark:shadow-[0_0_0_4px_rgba(255,255,255,0.2)]" />
+
+                                    <div className={`w-full md:w-1/2 px-2 sm:px-4 md:py-4 ${isEven ? "md:text-left md:pr-12" : "md:text-right md:pl-12"
+                                        }`}>
+                                        <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-black dark:text-white mb-1">
+                                            {data.title}
+                                        </h3>
+
+                                        <p className="text-sm sm:text-base font-semibold text-[#0090FF] mb-2 sm:mb-3">
+                                            {data.role} <span className="text-gray-600 dark:text-gray-400 font-normal">| {formatDate(data.startDate)}</span>
+                                        </p>
+
+                                        <p className="text-xs sm:text-sm md:text-base text-gray-600 dark:text-gray-300 leading-relaxed text-justify md:text-inherit">
+                                            {data.description}
+                                        </p>
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
+                    </div>
+                )}
             </div>
         </section>
     );

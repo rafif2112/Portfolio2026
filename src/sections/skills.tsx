@@ -8,6 +8,7 @@ import {
 import { motion } from "framer-motion"
 import { useAppDispatch, useAppSelector } from "@/store/hooks"
 import { useEffect } from "react"
+import { Skeleton } from "@/components/ui/skeleton"
 // import { fetchSkillData } from "@/store/skill"
 
 const SkillCard = ({
@@ -43,7 +44,7 @@ const SkillCard = ({
 
 export function SkillSection() {
     const dispatch = useAppDispatch();
-    const { data } = useAppSelector((state) => state.skill);
+    const { data, loading } = useAppSelector((state) => state.skill);
 
     useEffect(() => {
         // dispatch(fetchSkillData());
@@ -74,16 +75,33 @@ export function SkillSection() {
                 viewport={{ once: false, amount: 0.8 }}
                 transition={{ duration: 0.8 }}
             >
-                <Marquee className="[--duration:20s] sm:[--duration:15s]">
-                    {firstRow.map((data) => (
-                        <SkillCard key={data.id} skill={data.name} imageUrl={data.imageUrl} />
-                    ))}
-                </Marquee>
-                <Marquee reverse className="[--duration:20s] sm:[--duration:15s] ">
-                    {secondRow.map((data) => (
-                        <SkillCard key={data.id} skill={data.name} imageUrl={data.imageUrl} />
-                    ))}
-                </Marquee>
+                {loading ? (
+                    <div className="w-full flex flex-col gap-6">
+                        {Array.from({ length: 2 }).map((_, i) => (
+                            <div key={i} className="w-full flex gap-4 overflow-hidden">
+                                {Array.from({ length: 16 }).map((_, j) => (
+                                    <Skeleton
+                                        key={j}
+                                        className="h-12 w-12 rounded-lg sm:h-16 sm:w-16"
+                                    />
+                                ))}
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div>
+                        <Marquee className="[--duration:20s] sm:[--duration:15s]">
+                            {firstRow.map((data) => (
+                                <SkillCard key={data.id} skill={data.name} imageUrl={data.imageUrl} />
+                            ))}
+                        </Marquee>
+                        <Marquee reverse className="[--duration:20s] sm:[--duration:15s] ">
+                            {secondRow.map((data) => (
+                                <SkillCard key={data.id} skill={data.name} imageUrl={data.imageUrl} />
+                            ))}
+                        </Marquee>
+                    </div>
+                )}
                 {/* <div className="from-background pointer-events-none absolute inset-y-0 -left-1 w-1/3 sm:w-1/4 bg-linear-to-r"></div>
                 <div className="from-background pointer-events-none absolute inset-y-0 -right-1 w-1/3 sm:w-1/4 bg-linear-to-l"></div> */}
             </motion.div>

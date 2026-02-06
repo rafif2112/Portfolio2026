@@ -39,7 +39,7 @@ export function HomeSection() {
     useEffect(() => {
         // dispatch(fetchAboutData());
     }, [dispatch]);
-    
+
     return (
         <>
             <motion.section
@@ -69,11 +69,11 @@ export function HomeSection() {
 
                 <div className="flex flex-col items-center mt-4 md:mt-6 w-full">
 
-                    <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-center leading-tight">
-                        <motion.div variants={itemVariants}>
-                            { data?.name || "Muhamad Rafif" }
-                        </motion.div>
-                    </h1>
+                    <motion.h1
+                        className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-center leading-tight"
+                        variants={itemVariants}>
+                        {data?.name || "Muhamad Rafif"}
+                    </motion.h1>
 
                     <div className="w-full max-w-70 sm:max-w-xl md:max-w-1xl flex flex-col items-end mt-2 sm:mt-4">
                         <motion.span
@@ -91,7 +91,7 @@ export function HomeSection() {
                         </motion.span>
                     </div>
                 </div>
-                    
+
             </motion.section>
             <ScrollIndicator />
         </>
