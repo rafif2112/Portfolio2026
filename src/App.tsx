@@ -60,6 +60,7 @@ function InnerApp() {
 
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:image" content="https://muhamadrafif.vercel.app/og-image.png" />
+        <script defer src="https://cloud.umami.is/script.js" data-website-id="9236e765-3cf2-40fb-9a36-f7b38621acfa"></script>
       </Helmet>
       <div>
         <Navbar />
