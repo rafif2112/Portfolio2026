@@ -5,6 +5,7 @@ import contactReducer from "./contact";
 import projectReducer from "./project";
 import experienceReducer from "./experience";
 import statsReducer from "./stats";
+import certificateReducer from "./certificate";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     project: projectReducer,
     experience: experienceReducer,
     stats: statsReducer,
+    certificate: certificateReducer,
   },
 });
 

@@ -114,7 +114,7 @@
 
 export default function FooterV1() {
   return (
-    <footer className="text-white overflow-hidden pt-24 px-6 relative">
+    <footer className="text-white overflow-hidden pt-24 mt-10 px-6 relative">
       {/* Background Element (Watermark Nama Panggilan) */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
         <h1 className="text-[8rem] sm:text-[18vw] font-black bg-linear-to-t from-white/10 to-black/20 dark:from-black/20 dark:to-white/10 bg-clip-text text-transparent tracking-tighter leading-none uppercase">

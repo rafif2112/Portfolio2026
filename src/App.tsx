@@ -10,6 +10,7 @@ import { fetchProjectData } from './store/project'
 import { fetchContactData } from './store/contact'
 import { fetchExperienceData } from './store/experience'
 import { fetchStatsData } from './store/stats'
+import { fetchCertificateData } from './store/certificate'
 import { ThemeProvider } from './utils/theme-provider'
 import SmoothScroll from './components/smooth-scroll'
 import Footer from './components/footer'
@@ -38,6 +39,7 @@ function InnerApp() {
     dispatch(fetchContactData());
     dispatch(fetchExperienceData());
     dispatch(fetchStatsData());
+    dispatch(fetchCertificateData());
   }, [dispatch])
 
   return (
